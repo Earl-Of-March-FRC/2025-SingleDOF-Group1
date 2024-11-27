@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import frc.robot.Constants.EncoderConstants;
@@ -15,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {
-  private final WPI_VictorSPX motor = new WPI_VictorSPX(MotorConstants.moterPort);
+  private final WPI_TalonSRX motor = new WPI_TalonSRX(MotorConstants.motorID);
   private final Encoder encoder = new Encoder(0, 1);
 
   /** Creates a new ShooterSubsystem. */
