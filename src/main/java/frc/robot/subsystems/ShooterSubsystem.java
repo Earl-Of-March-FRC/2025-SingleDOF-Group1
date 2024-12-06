@@ -5,12 +5,15 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import frc.robot.Constants;
 import frc.robot.Constants.EncoderConstants;
 import frc.robot.Constants.MotorConstants;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.units.Velocity;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -32,6 +35,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public double getDistance(){
     return encoder.getDistance() * EncoderConstants.encoderCountsToMeters;
+  }
+
+  public void setSpeedRPM(double RPM){
+    motor.set(TalonSRXControlMode.Velocity, RPM / 600 * Constants.EncoderConstants.ticksPerRevolution);
   }
 
   @Override
