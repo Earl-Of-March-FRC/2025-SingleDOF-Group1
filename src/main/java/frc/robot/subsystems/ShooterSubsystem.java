@@ -13,6 +13,8 @@ import frc.robot.Constants;
 import frc.robot.Constants.EncoderConstants;
 import frc.robot.Constants.MotorConstants;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.units.Angle;
 import edu.wpi.first.units.Velocity;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,6 +23,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ShooterSubsystem extends SubsystemBase {
   private final WPI_TalonSRX motor = new WPI_TalonSRX(MotorConstants.motorID);
   private final Encoder encoder = new Encoder(0, 1);
+
+  private final PIDController posPID = new PIDController(SmartDashboard.getNumber("PID pos P", Constants.PIDConstants.pos_kp), 
+  SmartDashboard.getNumber("PID pos I", Constants.PIDConstants.pos_ki), 
+  SmartDashboard.getNumber("PID pos D", Constants.PIDConstants.pos_kd));
+  
+  
 
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
@@ -39,6 +47,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void setSpeedRPM(double RPM){
     motor.set(TalonSRXControlMode.Velocity, RPM / 600 * Constants.EncoderConstants.ticksPerRevolution);
+  }
+
+  public void setSpeedAngle(double angle){ //angle in degree
+    motor.set(TalonSRXControlMode.Position, angle / 360 * Constants.EncoderConstants.ticksPerRevolution);
+  }
+
+  public PIDController getPosPID(){
+    return posPID;
   }
 
   @Override
