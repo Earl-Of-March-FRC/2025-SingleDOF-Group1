@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.ShooterRPMCmd;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -43,7 +44,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Manual control
     shooter.setDefaultCommand(
-      new ShooterCmd(
+      new ShooterRPMCmd(
         shooter,
         () -> MathUtil.applyDeadband(controller.getRawAxis(OperatorConstants.leftJoystickAxis), OperatorConstants.joystickDeadband)
       )
