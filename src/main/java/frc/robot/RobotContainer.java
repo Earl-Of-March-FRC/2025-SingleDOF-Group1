@@ -46,9 +46,8 @@ public class RobotContainer {
     shooter.setDefaultCommand(
       new ShooterRPMCmd(
         shooter,
-        () -> MathUtil.applyDeadband(controller.getRawAxis(OperatorConstants.leftJoystickAxis), OperatorConstants.joystickDeadband)
-      )
-    );
+        () -> MathUtil.applyDeadband(controller.getLeftY(), OperatorConstants.joystickDeadband)
+      ));
 
     // Timed autonomous
     autoChooser.setDefaultOption("Phase 1 Auto", new ShooterAutoCmd(shooter, MotorConstants.autoSpeed, MotorConstants.autoTimeout));

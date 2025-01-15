@@ -33,6 +33,13 @@ public final class Constants {
   public static final class EncoderConstants{
     public static final double wheelRadius = 3;
     public static final double gearRatio = 8.46; 
+    public static final double ticksPerRevolution = 4096;
     public static final double encoderCountsToMeters = Units.inchesToMeters((2 * Math.PI * wheelRadius) / gearRatio);
+  }
+
+  public static final class PIDConstants{
+    public static final double pos_kp = 0.1;
+    public static final double pos_ki = 0.1;
+    public static final double pos_kd = 0.1;
   }
 }

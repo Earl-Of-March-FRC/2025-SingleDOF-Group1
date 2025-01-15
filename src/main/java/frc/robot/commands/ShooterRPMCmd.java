@@ -29,7 +29,7 @@ public class ShooterRPMCmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSub.setSpeedRPM(speed.getAsDouble());
+    shooterSub.setSpeedPercent(speed.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

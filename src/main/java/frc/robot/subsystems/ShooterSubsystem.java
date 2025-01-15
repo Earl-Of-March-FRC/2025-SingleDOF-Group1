@@ -21,8 +21,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {
-  private final WPI_TalonSRX motor = new WPI_TalonSRX(MotorConstants.motorID);
-  private final Encoder encoder = new Encoder(0, 1);
+  private final WPI_TalonSRX motor = new WPI_TalonSRX(3);
+private final WPI_TalonSRX top = new WPI_TalonSRX(6);  
+private final Encoder encoder = new Encoder(0, 1);
 
   private final PIDController posPID = new PIDController(SmartDashboard.getNumber("PID pos P", Constants.PIDConstants.pos_kp), 
   SmartDashboard.getNumber("PID pos I", Constants.PIDConstants.pos_ki), 
@@ -33,12 +34,15 @@ public class ShooterSubsystem extends SubsystemBase {
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
     motor.setNeutralMode(NeutralMode.Brake);
+    top.setNeutralMode(NeutralMode.Brake);
+    motor.setInverted(true);
     encoder.reset();
   }
 
   public void shoot(double speed){
     double clampedSpeed = MathUtil.clamp(speed, -MotorConstants.maxSpeed, MotorConstants.maxSpeed);
     motor.set(clampedSpeed);
+    top.set(clampedSpeed);
   }
 
   public double getDistance(){
@@ -47,6 +51,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void setSpeedRPM(double RPM){
     motor.set(TalonSRXControlMode.Velocity, RPM / 600 * Constants.EncoderConstants.ticksPerRevolution);
+  }
+
+  public void setSpeedPercent(double RPM){
+    motor.set(TalonSRXControlMode.PercentOutput, RPM / 600 * Constants.EncoderConstants.ticksPerRevolution);
+      top.set(TalonSRXControlMode.PercentOutput, RPM / 600 * Constants.EncoderConstants.ticksPerRevolution);
   }
 
   public void setSpeedAngle(double angle){ //angle in degree
