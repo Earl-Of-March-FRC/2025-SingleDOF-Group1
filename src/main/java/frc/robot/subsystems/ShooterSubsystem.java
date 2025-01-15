@@ -53,9 +53,9 @@ private final Encoder encoder = new Encoder(0, 1);
     motor.set(TalonSRXControlMode.Velocity, RPM / 600 * Constants.EncoderConstants.ticksPerRevolution);
   }
 
-  public void setSpeedPercent(double RPM){
-    motor.set(TalonSRXControlMode.PercentOutput, RPM / 600 * Constants.EncoderConstants.ticksPerRevolution);
-      top.set(TalonSRXControlMode.PercentOutput, RPM / 600 * Constants.EncoderConstants.ticksPerRevolution);
+  public void setSpeedPercent(double speedBottom, double speedTop){
+    motor.set(TalonSRXControlMode.PercentOutput, speedBottom / 600 * Constants.EncoderConstants.ticksPerRevolution);
+    top.set(TalonSRXControlMode.PercentOutput, speedTop / 600 * Constants.EncoderConstants.ticksPerRevolution);
   }
 
   public void setSpeedAngle(double angle){ //angle in degree

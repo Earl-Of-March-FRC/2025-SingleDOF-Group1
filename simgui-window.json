@@ -5,11 +5,11 @@
   "MainWindow": {
     "GLOBAL": {
       "fps": "120",
-      "height": "689",
+      "height": "1111",
       "maximized": "1",
       "style": "0",
       "userScale": "2",
-      "width": "1366",
+      "width": "1920",
       "xpos": "0",
       "ypos": "29"
     }
@@ -35,12 +35,12 @@
     },
     "###NetworkTables": {
       "Collapsed": "0",
-      "Pos": "442,547",
+      "Pos": "366,670",
       "Size": "1500,370"
     },
     "###NetworkTables Info": {
       "Collapsed": "0",
-      "Pos": "338,491",
+      "Pos": "371,102",
       "Size": "1500,290"
     },
     "###Other Devices": {
@@ -50,7 +50,7 @@
     },
     "###System Joysticks": {
       "Collapsed": "0",
-      "Pos": "195,419",
+      "Pos": "1319,287",
       "Size": "232,254"
     },
     "###Timing": {

@@ -34,7 +34,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final XboxController controller = new XboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController controller = new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
@@ -43,11 +43,12 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Manual control
-    shooter.setDefaultCommand(
-      new ShooterRPMCmd(
-        shooter,
-        () -> MathUtil.applyDeadband(controller.getLeftY(), OperatorConstants.joystickDeadband)
-      ));
+    // shooter.setDefaultCommand(
+    //   new ShooterRPMCmd(
+    //     shooter,
+    //     () -> SmartDashboard.getNumber("speedTop", 0),
+    //     () -> SmartDashboard.getNumber("speedBottom", 0),
+    //   ));
 
     // Timed autonomous
     autoChooser.setDefaultOption("Phase 1 Auto", new ShooterAutoCmd(shooter, MotorConstants.autoSpeed, MotorConstants.autoTimeout));
@@ -67,12 +68,17 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    controller.b()  
+        .whileTrue(new ShooterRPMCmd(shooter, 
+        () -> -1,
+        () -> -1)
+        );
+        // () -> SmartDashboard.getNumber("speedBottom", 0),
+        // () -> SmartDashboard.getNumber("speedTop", 0)));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   }
 
   /**

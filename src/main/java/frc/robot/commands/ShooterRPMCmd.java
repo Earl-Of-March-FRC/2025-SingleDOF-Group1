@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -12,13 +13,15 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShooterRPMCmd extends Command {
 
   private ShooterSubsystem shooterSub;
-  private DoubleSupplier speed;
+  private DoubleSupplier speedBottom, speedTop;
+  private BooleanSupplier start;
 
   /** Creates a new Shoot. */
-  public ShooterRPMCmd(ShooterSubsystem shooter, DoubleSupplier speed) {
+  public ShooterRPMCmd(ShooterSubsystem shooter, DoubleSupplier speedBottom, DoubleSupplier speedTop) {
     // Use addRequirements() here to declare subsystem dependencies.
     shooterSub = shooter;
-    this.speed = speed;
+    this.speedBottom = speedBottom;
+    this.speedTop = speedTop;
     addRequirements(shooterSub);
   }
 
@@ -29,7 +32,10 @@ public class ShooterRPMCmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSub.setSpeedPercent(speed.getAsDouble());
+
+      shooterSub.setSpeedPercent(speedBottom.getAsDouble(), speedTop.getAsDouble());
+  
+   
   }
 
   // Called once the command ends or is interrupted.
